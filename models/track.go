@@ -10,3 +10,8 @@ type CreateTrackInput struct {
 	Artist string `json:"artist" binding:"required"`
 	Title  string `json:"title" binding:"required"`
 }
+
+type UpdateTrackInput struct {
+	Artist string `json:"artist"`
+	Title  string `json:"title"`
+}
