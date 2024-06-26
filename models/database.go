@@ -6,7 +6,7 @@ import (
 )
 
 func ConnectDB() *gorm.DB {
-	db, err := gorm.Open("postgres", "host=127.0.0.1 port=5432 user=postgres dbname=musicstore password=postgres sslmode=disable")
+	db, err := gorm.Open("postgres", "host=127.0.0.1 port=5559 user=admin dbname=tracks password=password sslmode=disable")
 	if err != nil {
 		panic("Не удалось подключиться к базе данных")
 	}

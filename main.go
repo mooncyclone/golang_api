@@ -1,19 +1,20 @@
 package main
 
 import (
-	"github.com/alonelegion/musicstore_rest_api/models"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/mooncyclone/golang_api/controllers"
+	"github.com/mooncyclone/golang_api/models"
 )
 
 func main() {
 	route := gin.Default()
 
-	models.ConnectDB() // new
+	// Подключение к базе данных
+	models.ConnectDB()
 
-	route.GET("/", func(context *gin.Context) {
-		context.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
-	})
+	// Маршруты
+	route.GET("/tracks", controllers.GetAllTracks)
 
+	// Запуск сервера
 	route.Run()
 }
