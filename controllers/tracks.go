@@ -18,14 +18,27 @@ func GetAllTracks(context *gin.Context) {
 // POST /tracks
 // Создание трека
 func CreateTrack(context *gin.Context) {
-	var input CreateTrackInput
+	var input models.CreateTrackInput
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	track := models.Track{Artist: input.Artist, Title: input.Title}
-	models.DB.Create(&track)
+	models.ConnectDB().Create(&track)
+
+	context.JSON(http.StatusOK, gin.H{"tracks": track})
+}
+
+// GET /tracks/:id
+// Получение одного трека по ID
+func GetTrack(context *gin.Context) {
+	// Проверяем имеется ли запись
+	var track models.Track
+	if err := models.ConnectDB().Where("id = ?", context.Param("id")).First(&track).Error; err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Запись не существует"})
+		return
+	}
 
 	context.JSON(http.StatusOK, gin.H{"tracks": track})
 }

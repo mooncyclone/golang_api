@@ -14,6 +14,8 @@ func main() {
 
 	// Маршруты
 	route.GET("/tracks", controllers.GetAllTracks)
+	route.POST("/tracks", controllers.CreateTrack) // Создание трека
+	route.GET("/tracks/:id", controllers.GetTrack) // Получение конкретного трека
 
 	// Запуск сервера
 	route.Run()
