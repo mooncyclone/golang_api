@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_DB: tracks
+      LANG: ru_RU.UTF-8
+      LANGUAGE: ru_RU.UTF-8
+      LC_ALL: ru_RU.UTF-8
+    ports:
+      - 5559:5432
+    networks:
+      - tracks
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+networks:
+  tracks:
+    name: tracks
