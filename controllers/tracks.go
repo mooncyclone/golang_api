@@ -53,7 +53,7 @@ func UpdateTrack(context *gin.Context) {
 		return
 	}
 
-	var input UpdateTrackInput
+	var input models.UpdateTrackInput
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
